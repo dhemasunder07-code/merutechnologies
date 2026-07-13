@@ -17,6 +17,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://merutechnologies.com'),
   title: 'Meru Technologies - AI-Powered Web Development & Digital Marketing',
   description: 'We construct high-performance corporate websites and scale marketing channels through custom artificial intelligence integrations.',
   openGraph: {
