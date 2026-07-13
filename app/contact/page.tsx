@@ -283,8 +283,8 @@ export default function ContactPage() {
                   <div>
                     <h4 className="font-heading font-bold text-white text-sm">Headquarters Address</h4>
                     <p className="text-xs text-text-secondary leading-relaxed mt-1">
-                      123 Technology Way, Suite 400<br />
-                      Silicon Valley, CA 94025
+                      Kukatpally, Hyderabad<br />
+                      Telangana, India
                     </p>
                   </div>
                 </div>
@@ -308,7 +308,7 @@ export default function ContactPage() {
                   <div>
                     <h4 className="font-heading font-bold text-white text-sm">Call Support</h4>
                     <p className="text-xs text-text-secondary leading-relaxed mt-1">
-                      +1 (800) 555-6378 (Toll Free)
+                      +91 8464955103
                     </p>
                   </div>
                 </div>
@@ -323,7 +323,7 @@ export default function ContactPage() {
                     <span className="absolute inset-1.5 bg-primary rounded-full shadow-[0_0_10px_rgba(217,255,0,0.5)] border border-background-custom" />
                   </div>
                   <span className="absolute text-[10px] text-white/50 uppercase font-mono mt-10">
-                    Silicon Valley, CA
+                    Kukatpally, Hyderabad
                   </span>
                 </div>
               </div>
@@ -336,7 +336,7 @@ export default function ContactPage() {
 
       {/* Floating WhatsApp Chat Widget (Bottom Right) */}
       <a
-        href="https://wa.me/1234567890"
+        href="https://wa.me/918464955103"
         target="_blank"
         rel="noreferrer"
         className="fixed bottom-6 right-6 z-40 bg-[#25D366] hover:bg-[#20ba5a] text-white h-14 w-14 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105"

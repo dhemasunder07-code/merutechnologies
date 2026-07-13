@@ -24,13 +24,13 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="flex flex-col gap-6">
             <Link href="/" className="flex items-center gap-3">
-              <div className="relative h-8 w-auto overflow-hidden">
+              <div className="relative h-16 w-auto overflow-hidden">
                 <Image
                   src="/meru-icon.png"
                   alt="Meru Technologies Logo"
-                  width={32}
-                  height={32}
-                  className="object-contain h-8 w-auto"
+                  width={64}
+                  height={64}
+                  className="object-contain h-16 w-auto"
                 />
               </div>
               <span className="font-heading font-bold text-xl tracking-tight text-white">
@@ -70,7 +70,7 @@ export default function Footer() {
                 <FaFacebook className="h-4 w-4" />
               </a>
               <a
-                href="https://wa.me/1234567890"
+                href="https://wa.me/918464955103"
                 target="_blank"
                 rel="noreferrer"
                 className="h-9 w-9 rounded-full bg-card border border-border-custom flex items-center justify-center text-text-secondary hover:text-primary hover:border-primary transition-all duration-300"
@@ -190,7 +190,7 @@ export default function Footer() {
             <div className="flex flex-col gap-2 mt-2 font-sans text-xs text-text-secondary">
               <div className="flex items-center gap-2">
                 <MapPin className="h-3.5 w-3.5 text-primary flex-shrink-0" />
-                <span>123 Technology Way, Silicon Valley, CA</span>
+                <span>Kukatpally, Hyderabad, Telangana</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-3.5 w-3.5 text-primary flex-shrink-0" />
@@ -198,7 +198,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="h-3.5 w-3.5 text-primary flex-shrink-0" />
-                <span>+1 (800) 555-MERU</span>
+                <span>+91 8464955103</span>
               </div>
             </div>
           </div>

@@ -44,13 +44,13 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative h-9 w-auto overflow-hidden transition-transform duration-300 group-hover:scale-105">
+            <div className="relative h-18 w-auto overflow-hidden transition-transform duration-300 group-hover:scale-105">
               <Image
                 src="/meru-icon.png"
                 alt="Meru Technologies Logo"
-                width={36}
-                height={36}
-                className="object-contain h-9 w-auto"
+                width={72}
+                height={72}
+                className="object-contain h-18 w-auto"
                 priority
               />
             </div>

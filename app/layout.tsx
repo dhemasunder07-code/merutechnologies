@@ -55,15 +55,15 @@ export default function RootLayout({
     'name': 'Meru Technologies',
     'image': 'https://merutechnologies.com/meru-icon.png',
     'url': 'https://merutechnologies.com',
-    'telephone': '+1-800-555-6378',
+    'telephone': '+91-8464955103',
     'priceRange': '$$$',
     'address': {
       '@type': 'PostalAddress',
-      'streetAddress': '123 Technology Way',
-      'addressLocality': 'Silicon Valley',
-      'addressRegion': 'CA',
-      'postalCode': '94025',
-      'addressCountry': 'US'
+      'streetAddress': 'Kukatpally',
+      'addressLocality': 'Hyderabad',
+      'addressRegion': 'Telangana',
+      'postalCode': '500072',
+      'addressCountry': 'IN'
     },
     'sameAs': [
       'https://www.facebook.com/merutechnologies',
