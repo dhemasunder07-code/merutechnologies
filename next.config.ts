@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    // Use unoptimized images for Cloudflare Workers compatibility
+    // This avoids the WORKER_SELF_REFERENCE service binding requirement
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
