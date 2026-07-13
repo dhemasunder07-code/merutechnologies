@@ -8,7 +8,7 @@ const testimonials = [
   {
     name: 'Sarah Jenkins',
     role: 'CEO, Fintech Spark',
-    text: 'Meru Technologies completely revamped our acquisition funnel. Their AI marketing frameworks scaled our campaign ROAS to 5.2x in less than two months. Absolutely outstanding execution.',,
+    text: 'Meru Technologies completely revamped our acquisition funnel. Their AI marketing frameworks scaled our campaign ROAS to 5.2x in less than two months. Absolutely outstanding execution.',
     rating: 5,
   },
   {
