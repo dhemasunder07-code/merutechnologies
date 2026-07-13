@@ -42,6 +42,11 @@ export const metadata: Metadata = {
     description: 'We construct high-performance corporate websites and scale marketing channels through custom artificial intelligence integrations.',
     images: ['/meru-icon.png'],
   },
+  icons: {
+    icon: '/meru-icon.png',
+    shortcut: '/meru-icon.png',
+    apple: '/meru-icon.png',
+  },
 };
 
 export default function RootLayout({
