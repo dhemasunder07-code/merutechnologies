@@ -37,6 +37,14 @@ export default function Footer() {
                 Meru Technologies
               </span>
             </Link>
+            <div className="-mt-3">
+              <p className="font-heading text-xs font-bold text-primary tracking-wide">
+                Hemasunder D
+              </p>
+              <p className="text-[10px] text-text-secondary/70 tracking-widest uppercase font-mono mt-0.5">
+                Founder & CEO
+              </p>
+            </div>
             <p className="font-sans text-sm text-text-secondary leading-relaxed max-w-xs">
               Empowering startups, businesses, and enterprises with premium AI-powered digital solutions, custom websites, branding, and automation.
             </p>
