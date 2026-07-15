@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -9,8 +9,10 @@ const plans = [
   {
     name: 'Starter',
     desc: 'Perfect for early-stage startups needing high-performance basic assets.',
-    monthlyPrice: 1499,
-    yearlyPrice: 1199,
+    prices: {
+      USD: { monthly: 1499, yearly: 1199 },
+      INR: { monthly: 124999, yearly: 99999 },
+    },
     features: [
       'Custom 5-Page Next.js Website',
       'Basic On-Page SEO Setup',
@@ -25,8 +27,10 @@ const plans = [
   {
     name: 'Growth',
     desc: 'Designed for scaling companies seeking to establish organic search dominance.',
-    monthlyPrice: 3499,
-    yearlyPrice: 2799,
+    prices: {
+      USD: { monthly: 3499, yearly: 2799 },
+      INR: { monthly: 289999, yearly: 229999 },
+    },
     features: [
       'Next.js Web App with CMS Integration',
       'Technical SEO Audits & Content Planning',
@@ -42,8 +46,10 @@ const plans = [
   {
     name: 'Enterprise',
     desc: 'Custom solution for large organizations requiring dedicated tech ecosystems.',
-    monthlyPrice: 7999,
-    yearlyPrice: 6399,
+    prices: {
+      USD: { monthly: 7999, yearly: 6399 },
+      INR: { monthly: 659999, yearly: 529999 },
+    },
     features: [
       'Custom Web & App Ecosystems',
       'Full AI Operations Automation Integration',
@@ -59,6 +65,38 @@ const plans = [
 
 export default function Pricing() {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
+  const [currency, setCurrency] = useState<'INR' | 'USD'>('USD');
+
+  useEffect(() => {
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const isIndia = tz === 'Asia/Kolkata' || tz === 'Asia/Calcutta' || tz.includes('Kolkata');
+      const savedCurrency = localStorage.getItem('meru_currency') as 'INR' | 'USD';
+      if (savedCurrency === 'INR' || savedCurrency === 'USD') {
+        setCurrency(savedCurrency);
+      } else if (isIndia) {
+        setCurrency('INR');
+      } else {
+        setCurrency('USD');
+      }
+    } catch (e) {
+      // Fallback
+    }
+
+    // Sync currency changes from other components
+    const handleSync = () => {
+      const savedCurrency = localStorage.getItem('meru_currency') as 'INR' | 'USD';
+      if (savedCurrency) setCurrency(savedCurrency);
+    };
+    window.addEventListener('meru_currency_change', handleSync);
+    return () => window.removeEventListener('meru_currency_change', handleSync);
+  }, []);
+
+  const handleCurrencyChange = (cur: 'INR' | 'USD') => {
+    setCurrency(cur);
+    localStorage.setItem('meru_currency', cur);
+    window.dispatchEvent(new Event('meru_currency_change'));
+  };
 
   return (
     <section className="py-24 bg-background-custom border-t border-border-custom/50 relative overflow-hidden">
@@ -80,35 +118,62 @@ export default function Pricing() {
           </p>
         </div>
 
-        {/* Monthly/Yearly Billing Toggle */}
-        <div className="flex justify-center items-center gap-3.5 mb-16">
-          <span className={`font-sans text-sm ${billingCycle === 'monthly' ? 'text-white' : 'text-text-secondary'}`}>
-            Monthly
-          </span>
-          <button
-            onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'yearly' : 'monthly')}
-            className="w-14 h-8 bg-card border border-border-custom rounded-full p-1 relative transition-colors duration-300"
-            aria-label="Toggle Billing Cycle"
-          >
-            <motion.div
-              layout
-              className="w-5.5 h-5.5 bg-primary rounded-full"
-              animate={{ x: billingCycle === 'monthly' ? 0 : 22 }}
-              transition={{ type: 'spring', stiffness: 350, damping: 25 }}
-            />
-          </button>
-          <span className={`font-sans text-sm flex items-center gap-1.5 ${billingCycle === 'yearly' ? 'text-white' : 'text-text-secondary'}`}>
-            Yearly
-            <span className="bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full">
-              Save 20%
+        {/* Toggle Controls Container */}
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-12 mb-16">
+          {/* Monthly/Yearly Billing Toggle */}
+          <div className="flex items-center gap-3.5">
+            <span className={`font-sans text-sm ${billingCycle === 'monthly' ? 'text-white' : 'text-text-secondary'}`}>
+              Monthly
             </span>
-          </span>
+            <button
+              onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'yearly' : 'monthly')}
+              className="w-14 h-8 bg-card border border-border-custom rounded-full p-1 relative transition-colors duration-300"
+              aria-label="Toggle Billing Cycle"
+            >
+              <motion.div
+                layout
+                className="w-5.5 h-5.5 bg-primary rounded-full"
+                animate={{ x: billingCycle === 'monthly' ? 0 : 22 }}
+                transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+              />
+            </button>
+            <span className={`font-sans text-sm flex items-center gap-1.5 ${billingCycle === 'yearly' ? 'text-white' : 'text-text-secondary'}`}>
+              Yearly
+              <span className="bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full">
+                Save 20%
+              </span>
+            </span>
+          </div>
+
+          {/* Currency Switcher */}
+          <div className="flex items-center bg-card border border-border-custom rounded-full p-1 shadow-[0_0_15px_rgba(217,255,0,0.02)]">
+            <button
+              onClick={() => handleCurrencyChange('INR')}
+              className={`font-sans text-xs font-semibold px-4.5 py-2 rounded-full cursor-pointer transition-all duration-300 ${
+                currency === 'INR' ? 'bg-primary text-background-custom font-bold' : 'text-text-secondary hover:text-white'
+              }`}
+            >
+              🇮🇳 ₹ INR
+            </button>
+            <button
+              onClick={() => handleCurrencyChange('USD')}
+              className={`font-sans text-xs font-semibold px-4.5 py-2 rounded-full cursor-pointer transition-all duration-300 ${
+                currency === 'USD' ? 'bg-primary text-background-custom font-bold' : 'text-text-secondary hover:text-white'
+              }`}
+            >
+              🌍 $ USD
+            </button>
+          </div>
         </div>
 
         {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
           {plans.map((plan) => {
-            const price = billingCycle === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice;
+            const priceObj = plan.prices[currency];
+            const price = billingCycle === 'monthly' ? priceObj.monthly : priceObj.yearly;
+            const currencySymbol = currency === 'INR' ? '₹' : '$';
+            const displayPrice = currency === 'INR' ? price.toLocaleString('en-IN') : price.toLocaleString('en-US');
+
             return (
               <div
                 key={plan.name}
@@ -132,7 +197,9 @@ export default function Pricing() {
 
                   {/* Price */}
                   <div className="flex items-baseline gap-1.5 mb-8">
-                    <span className="font-heading font-extrabold text-4xl text-white">${price}</span>
+                    <span className="font-heading font-extrabold text-4xl text-white">
+                      {currencySymbol}{displayPrice}
+                    </span>
                     <span className="font-sans text-xs text-text-secondary">/ month</span>
                   </div>
 

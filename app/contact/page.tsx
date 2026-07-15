@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Mail, Phone, MapPin, Send, CheckCircle2, Calendar, MessageSquare } from 'lucide-react';
@@ -13,7 +13,7 @@ export default function ContactPage() {
     email: '',
     phone: '',
     service: 'Website Development',
-    budget: '$5,000 - $10,000',
+    budget: '₹1,00,000 - ₹5,00,000',
     details: '',
   });
 
@@ -24,6 +24,42 @@ export default function ContactPage() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
+
+  const [currency, setCurrency] = useState<'INR' | 'USD'>('USD');
+
+  useEffect(() => {
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const isIndia = tz === 'Asia/Kolkata' || tz === 'Asia/Calcutta' || tz.includes('Kolkata');
+      const savedCurrency = localStorage.getItem('meru_currency') as 'INR' | 'USD';
+      let activeCurrency: 'INR' | 'USD' = 'USD';
+      if (savedCurrency === 'INR' || savedCurrency === 'USD') {
+        activeCurrency = savedCurrency;
+      } else if (isIndia) {
+        activeCurrency = 'INR';
+      }
+      setCurrency(activeCurrency);
+      setFormState(prev => ({
+        ...prev,
+        budget: activeCurrency === 'INR' ? '₹1,00,000 - ₹5,00,000' : '$5,000 - $10,000'
+      }));
+    } catch (e) {
+      // Fallback
+    }
+
+    const handleSync = () => {
+      const savedCurrency = localStorage.getItem('meru_currency') as 'INR' | 'USD';
+      if (savedCurrency === 'INR' || savedCurrency === 'USD') {
+        setCurrency(savedCurrency);
+        setFormState(prev => ({
+          ...prev,
+          budget: savedCurrency === 'INR' ? '₹1,00,000 - ₹5,00,000' : '$5,000 - $10,000'
+        }));
+      }
+    };
+    window.addEventListener('meru_currency_change', handleSync);
+    return () => window.removeEventListener('meru_currency_change', handleSync);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -178,10 +214,21 @@ export default function ContactPage() {
                           onChange={(e) => setFormState({ ...formState, budget: e.target.value })}
                           className="bg-background-custom border border-border-custom rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors"
                         >
-                          <option>$5,000 - $10,000</option>
-                          <option>$10,000 - $25,000</option>
-                          <option>$25,000 - $50,000</option>
-                          <option>$50,000+</option>
+                          {currency === 'INR' ? (
+                            <>
+                              <option>₹1,00,000 - ₹5,00,000</option>
+                              <option>₹5,00,000 - ₹10,00,000</option>
+                              <option>₹10,00,000 - ₹25,00,000</option>
+                              <option>₹25,00,000+</option>
+                            </>
+                          ) : (
+                            <>
+                              <option>$5,000 - $10,000</option>
+                              <option>$10,000 - $25,000</option>
+                              <option>$25,000 - $50,000</option>
+                              <option>$50,000+</option>
+                            </>
+                          )}
                         </select>
                       </div>
                     </div>
