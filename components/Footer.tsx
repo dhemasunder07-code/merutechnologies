@@ -202,7 +202,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-3.5 w-3.5 text-primary flex-shrink-0" />
-                <span>growth@merutechnologies.com</span>
+                <a href="mailto:info@merutechnologies.in" className="hover:text-primary transition-colors">info@merutechnologies.in</a>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="h-3.5 w-3.5 text-primary flex-shrink-0" />

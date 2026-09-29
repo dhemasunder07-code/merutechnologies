@@ -61,6 +61,7 @@ export default function RootLayout({
     'image': 'https://merutechnologies.com/meru-icon.png',
     'url': 'https://merutechnologies.com',
     'telephone': '+91-8464955103',
+    'email': 'info@merutechnologies.in',
     'priceRange': '$$$',
     'address': {
       '@type': 'PostalAddress',

@@ -343,7 +343,7 @@ export default function ContactPage() {
                   <div>
                     <h4 className="font-heading font-bold text-white text-sm">Email Inquiries</h4>
                     <p className="text-xs text-text-secondary leading-relaxed mt-1">
-                      growth@merutechnologies.com
+                      <a href="mailto:info@merutechnologies.in" className="hover:text-primary transition-colors">info@merutechnologies.in</a>
                     </p>
                   </div>
                 </div>
